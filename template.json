@@ -10,6 +10,8 @@
       "guest_additions_mode": "disable",
       "iso_url": "{{ user `iso_url` }}",
       "iso_checksum": "{{ user `iso_checksum` }}",
+	  "cpus": 4,
+      "memory": 4096,
       "communicator": "winrm",
       "winrm_username": "vagrant",
       "winrm_password": "vagrant",
@@ -33,6 +35,27 @@
       "type": "file",
       "source": "scripts/unattend.xml",
       "destination": "C:/Windows/Panther/Unattend/"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/chocolatey.ps1",
+      "elevated_user": "vagrant",
+      "elevated_password": "vagrant"
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "choco install googlechrome -y",
+        "choco install notepadplusplus.install -y"
+      ],
+      "elevated_user": "vagrant",
+      "elevated_password": "vagrant"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/IIS.ps1",
+      "elevated_user": "vagrant",
+      "elevated_password": "vagrant"
     }
   ],
   "post-processors": [
